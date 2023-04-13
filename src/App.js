@@ -25,17 +25,26 @@ function App() {
        setAlert(null);
     },1500)
   }
-  const toggleMode = ()=>{
+  const removeBodyClasses =()=>{
+    document.body.classList.remove('bg-light')
+    document.body.classList.remove('bg-dark')
+    document.body.classList.remove('bg-warning')
+    document.body.classList.remove('bg-danger')
+    document.body.classList.remove('bg-sucess')
+  }
+  const toggleMode = (cls)=>{
+    removeBodyClasses();
+    document.body.classList.add('bg-' +cls)
     if(mode === 'light'){
       setMode('dark')
       document.body.style.backgroundColor = '#042743';
       showAlert("Dark mode has been enabled","success");
-      document.title = 'TextUtils - Dark Mode'
+      //document.title = 'TextUtils - Dark Mode'
         }else{
       setMode('light')
       document.body.style.backgroundColor='white';
       showAlert("Light mode has been enabled","success");
-      document.title = 'TextUtils - Light Mode'
+      //document.title = 'TextUtils - Light Mode'
 
         }
   }
@@ -50,10 +59,13 @@ function App() {
 
               <Route exact path="/" element={<>           
                  <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode}/>
-              <TextForm/></>}/>
+              <TextForm showAlert={showAlert} heading ="TextUtils-Word Counter,Character Counter,
+              Remove extra spaces"/></>}/>
               <Route exact path="/about" element={<>
                  <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode}/>
-              <About/></>}
+                 
+              <About/> </>}
+              
               />
               
             </Routes>
